@@ -46,15 +46,28 @@ function onGalleryImageClick(event) {
 
 }
 function showLargeImage() {
-    const instance = basicLightbox.create(`<img src="${lagreImageURL}">`);
-    instance.show();
-    closeLargeImage(instance);
-}
-function closeLargeImage(instance) {
-  document.addEventListener("keydown", (event) => {
+  function closeModal(event) {
     if (event.code === "Escape") {
       instance.close();
     }
+  }
+  const instance = basicLightbox.create(`<img src="${lagreImageURL}">`, {
+    onShow: (instance) => {
+
+      window.addEventListener("keydown", closeModal);
+
+    },
+    
+    onClose: (instance) => {
+
+      window.removeEventListener("keydown", closeModal);
+
+    }
+
   });
+
+  instance.show();
 }
+
+
 

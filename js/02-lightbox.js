@@ -7,8 +7,11 @@ const galleryMarkup = createGalleryMurkup(galleryItems);
 
 galleryDivRef.insertAdjacentHTML("beforeend", galleryMarkup);
 
-galleryDivRef.addEventListener("click", onGalleryImageClick);
 
+const lightbox = new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: 250,
+  });
 
 function createGalleryMurkup(galleryItems) {
   return galleryItems
@@ -21,19 +24,4 @@ function createGalleryMurkup(galleryItems) {
         `
     )
     .join("");
-}
-function onGalleryImageClick(event) {
-  event.preventDefault();
-    
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-  
-  showLargeImagesSlider();
-}
-function showLargeImagesSlider() {
-  const lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
 }
